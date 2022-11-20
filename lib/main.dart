@@ -20,9 +20,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final scoreController = TextEditingController();
 
   String result = "";
@@ -70,7 +75,9 @@ class HomeScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                calculateResult();
+                setState(() {
+                  calculateResult();
+                });
               },
               child: Text(
                 "Calculate",
@@ -82,7 +89,16 @@ class HomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   )),
             ),
-            Text(result),
+            Container(
+              padding: EdgeInsets.only(top: 100),
+              child: Text(
+                result,
+                style: TextStyle(
+                    fontSize: 75,
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
           ],
         ));
   }
